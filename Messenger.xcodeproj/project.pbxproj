@@ -19,6 +19,7 @@
 		AA4DC22A2701BC50007604BC /* VideoPlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC2292701BC50007604BC /* VideoPlayerVC.swift */; };
 		AA4DC22C2701BC72007604BC /* NewConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC22B2701BC72007604BC /* NewConversationVC.swift */; };
 		AA4DC22E2701BC86007604BC /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC22D2701BC86007604BC /* ProfileVC.swift */; };
+		AA4DC2302701F9AF007604BC /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC22F2701F9AF007604BC /* Extentions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		AA4DC2292701BC50007604BC /* VideoPlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerVC.swift; sourceTree = "<group>"; };
 		AA4DC22B2701BC72007604BC /* NewConversationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationVC.swift; sourceTree = "<group>"; };
 		AA4DC22D2701BC86007604BC /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		AA4DC22F2701F9AF007604BC /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			children = (
 				AA4DC205270051E8007604BC /* AppDelegate.swift */,
 				AA4DC207270051E8007604BC /* SceneDelegate.swift */,
+				AA4DC22F2701F9AF007604BC /* Extentions.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 			files = (
 				AA4DC22C2701BC72007604BC /* NewConversationVC.swift in Sources */,
 				AA4DC22A2701BC50007604BC /* VideoPlayerVC.swift in Sources */,
+				AA4DC2302701F9AF007604BC /* Extentions.swift in Sources */,
 				AA4DC20A270051E8007604BC /* ConversationVC.swift in Sources */,
 				AA4DC22E2701BC86007604BC /* ProfileVC.swift in Sources */,
 				AA4DC206270051E8007604BC /* AppDelegate.swift in Sources */,
