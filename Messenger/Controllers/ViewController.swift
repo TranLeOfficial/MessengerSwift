@@ -16,7 +16,11 @@ class ViewController: UIViewController {
         print("Merge lan 4")
         //merge NhanTT13 branch
         print("Merge lan 5")
-
+//<<<<<<< HEAD
+//
+//=======
+        print("Master")
+//>>>>>>> NhanTT13
     }
 
 
