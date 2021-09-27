@@ -14,7 +14,11 @@ class ViewController: UIViewController {
         print("Tran Thanh Nhan")
         print("NhanTT13")
         print("Merge lan 4")
+<<<<<<< HEAD
 
+=======
+        print("Merge lan 5")
+>>>>>>> NhanTT13
     }
 
 
