@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		AA4DC206270051E8007604BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC205270051E8007604BC /* AppDelegate.swift */; };
 		AA4DC208270051E8007604BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC207270051E8007604BC /* SceneDelegate.swift */; };
-		AA4DC20A270051E8007604BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC209270051E8007604BC /* ViewController.swift */; };
+		AA4DC20A270051E8007604BC /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC209270051E8007604BC /* ConversationVC.swift */; };
 		AA4DC20D270051E8007604BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA4DC20B270051E8007604BC /* Main.storyboard */; };
 		AA4DC20F270051EC007604BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA4DC20E270051EC007604BC /* Assets.xcassets */; };
 		AA4DC212270051EC007604BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA4DC210270051EC007604BC /* LaunchScreen.storyboard */; };
@@ -19,7 +19,7 @@
 		AA4DC202270051E8007604BC /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA4DC205270051E8007604BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA4DC207270051E8007604BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AA4DC209270051E8007604BC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AA4DC209270051E8007604BC /* ConversationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		AA4DC20C270051E8007604BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AA4DC20E270051EC007604BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA4DC211270051EC007604BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 		AA4DC21B27005238007604BC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				AA4DC209270051E8007604BC /* ViewController.swift */,
+				AA4DC209270051E8007604BC /* ConversationVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -185,7 +185,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA4DC20A270051E8007604BC /* ViewController.swift in Sources */,
+				AA4DC20A270051E8007604BC /* ConversationVC.swift in Sources */,
 				AA4DC206270051E8007604BC /* AppDelegate.swift in Sources */,
 				AA4DC208270051E8007604BC /* SceneDelegate.swift in Sources */,
 			);
