@@ -21,6 +21,11 @@ class ViewController: UIViewController {
 //=======
         print("Master")
 //>>>>>>> NhanTT13
+
+//=======
+        print("Master NhanTT14")
+        print("Nguyen Van NhanTT14")
+//>>>>>>> NhanTT14
     }
 
 
