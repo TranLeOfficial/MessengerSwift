@@ -12,11 +12,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Tran Thanh Nhan")
-<<<<<<< HEAD
-        print("Master")
-=======
-        print("NhanTT13")
->>>>>>> NhanTT13
     }
 
 
