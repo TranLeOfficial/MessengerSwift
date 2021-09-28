@@ -13,6 +13,7 @@ class RegisterVC: UIViewController {
         super.viewDidLoad()
         title = "Add new Account"
         view.backgroundColor = .white
+        print("Register National")
     }
 
 }
