@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 
 class RegisterVC: UIViewController {
@@ -38,6 +39,7 @@ class RegisterVC: UIViewController {
         field.layer.borderWidth = 1
         field.layer.borderColor = UIColor.lightGray.cgColor
         field.placeholder = "Email address..."
+        field.keyboardType = .emailAddress
         //padding
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         field.leftViewMode = .always
@@ -228,6 +230,17 @@ class RegisterVC: UIViewController {
             return
         }
         //Firebase register
+        //MARK: - Register User in Firebase
+        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+            guard let result = authResult, error == nil else {
+                print("Error creating User")
+                return
+            }
+            let newUser = result.user
+            print("Successfull Create User ", newUser)
+        }
+        
+        
     }
     
     //alert
@@ -254,6 +267,7 @@ extension RegisterVC : UITextFieldDelegate {
         }
         return true
     }
+    
 }
 
 //MARK: - Change to Photo
