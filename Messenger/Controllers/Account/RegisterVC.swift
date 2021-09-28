@@ -17,6 +17,9 @@ class RegisterVC: UIViewController {
         imageView.image = UIImage(systemName: "person")
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = 2
+        imageView.layer.borderColor = UIColor.blue.cgColor
         return imageView
     }()
     //scrollView
@@ -108,11 +111,11 @@ class RegisterVC: UIViewController {
     private let registerButton : UIButton = {
         let button = UIButton()
         button.setTitle("Register", for: .normal)
-        button.backgroundColor = .link
+        button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 1
-        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderColor = UIColor.lightGray.cgColor
         button.layer.masksToBounds = true
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
@@ -159,11 +162,14 @@ class RegisterVC: UIViewController {
     private func positionObjectView() {
         scrollView.frame = view.bounds
         let size = scrollView.width / 3
+        
         let sizeWidth = scrollView.width
         imageView.frame = CGRect(x: (sizeWidth - size) / 2,
                                  y: size - 100,
                                  width: size,
                                  height: size)
+        imageView.layer.cornerRadius = imageView.width / 2
+        
         emailField.frame = CGRect(x: 30,
                                  y: imageView.bottom + 20,
                                  width: scrollView.width - 60,
@@ -233,11 +239,12 @@ class RegisterVC: UIViewController {
     }
     //Add photo
     @objc private func didTapChangePhoto() {
-        print("Add To Photo")
+        presentPhotoActionSheet()
     }
 
 }
 
+//Text Field delegate
 extension RegisterVC : UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailField {
@@ -246,5 +253,53 @@ extension RegisterVC : UITextFieldDelegate {
             didTapRegisterButton()
         }
         return true
+    }
+}
+
+//MARK: - Change to Photo
+extension RegisterVC : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func presentPhotoActionSheet() {
+        let alert = UIAlertController(title: "Profile Picture", message: "How would you like to select a picture?", preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let takePhotoAction = UIAlertAction(title: "Take photo", style: .default) { _ in
+            self.presentCamera()
+        }
+        let choosePhotoAction = UIAlertAction(title: "Choose photo", style: .default) { _ in
+            self.presentPhotoLibrary()
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(takePhotoAction)
+        alert.addAction(choosePhotoAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    //Camera
+    func presentCamera() {
+        let vc = UIImagePickerController()
+        vc.sourceType = .camera
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true, completion: nil)
+    }
+    
+    //Library
+    func presentPhotoLibrary() {
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true, completion: nil)
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        if let selectImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            self.imageView.image = selectImage
+        }
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }
