@@ -79,16 +79,30 @@ class LoginVC: UIViewController {
         title = "Login"
         view.backgroundColor = .white
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register",
-                                                            style: .done,
-                                                            target: self,
-                                                            action: #selector(didTapRegister))
+        emailField.delegate = self
+        passwordField.delegate = self
+        
+        //action Button Tap
+        actionButton()
         //add subView
         addSubView()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         positionObjectView()
+    }
+    
+    
+    //actionButtonTap
+    private func actionButton() {
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register",
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(didTapRegister))
+        loginButton.addTarget(self,
+                              action: #selector(didTapLoginButton),
+                              for: .touchUpInside)
     }
     
     //set position view
@@ -122,9 +136,42 @@ class LoginVC: UIViewController {
         scrollView.addSubview(loginButton)
     }
     
+    
+    //MARK: - Action
     @objc private func didTapRegister() {
         let vc = RegisterVC()
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    //loginButton
+    @objc private func didTapLoginButton() {
+        guard let email = emailField.text,
+              let password = passwordField.text,
+              !email.isEmpty,
+              !password.isEmpty,
+              password.count >= 6 else {
+            alertNotificationLogin()
+            return
+        }
+    }
+    
+    //aler
+    private func alertNotificationLogin() {
+        let alert = UIAlertController(title: "Woops", message: "Please fill in all information and password must be 6 characters ", preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        alert.addAction(dismissAction)
+        present(alert, animated: true, completion: nil)
+    }
 
+}
+
+extension LoginVC : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailField {
+            passwordField.becomeFirstResponder()
+        } else if textField == passwordField {
+            didTapLoginButton()
+        }
+        return true
+    }
 }
