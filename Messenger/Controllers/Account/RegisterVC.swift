@@ -1,5 +1,5 @@
 //
-//  RegisterVC.swift
+//  LoginVC.swift
 //  Messenger
 //
 //  Created by Trần Lễ on 9/27/21.
@@ -7,13 +7,244 @@
 
 import UIKit
 
-class RegisterVC: UIViewController {
 
+class RegisterVC: UIViewController {
+    
+    //MARK: - object View
+    //imageView
+    private let imageView : UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "person")
+        imageView.tintColor = .gray
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    //scrollView
+    private let scrollView : UIScrollView =  {
+       let scrollView = UIScrollView()
+        scrollView.clipsToBounds = true
+       return scrollView
+    }()
+    //textField
+    private let emailField : UITextField = {
+        let field = UITextField()
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        field.returnKeyType = .continue
+        field.layer.cornerRadius = 12
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor.lightGray.cgColor
+        field.placeholder = "Email address..."
+        //padding
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
+        field.leftViewMode = .always
+        field.backgroundColor = .white
+        return field
+    }()
+    private let firstNameField : UITextField = {
+        let field = UITextField()
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        field.returnKeyType = .continue
+        field.layer.cornerRadius = 12
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor.lightGray.cgColor
+        field.placeholder = "First Name..."
+        //padding
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
+        field.leftViewMode = .always
+        field.backgroundColor = .white
+        return field
+    }()
+    private let lastNameField : UITextField = {
+        let field = UITextField()
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        field.returnKeyType = .continue
+        field.layer.cornerRadius = 12
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor.lightGray.cgColor
+        field.placeholder = "Last Name..."
+        //padding
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
+        field.leftViewMode = .always
+        field.backgroundColor = .white
+        return field
+    }()
+    private let passwordField : UITextField = {
+        let field = UITextField()
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        field.returnKeyType = .done
+        field.layer.cornerRadius = 12
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor.lightGray.cgColor
+        field.placeholder = "Password..."
+        //padding
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
+        field.leftViewMode = .always
+        field.backgroundColor = .white
+        field.isSecureTextEntry = true
+        return field
+    }()
+    private let rePasswordField : UITextField = {
+        let field = UITextField()
+        field.autocapitalizationType = .none
+        field.autocorrectionType = .no
+        field.returnKeyType = .done
+        field.layer.cornerRadius = 12
+        field.layer.borderWidth = 1
+        field.layer.borderColor = UIColor.lightGray.cgColor
+        field.placeholder = "Re - Password..."
+        //padding
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
+        field.leftViewMode = .always
+        field.backgroundColor = .white
+        field.isSecureTextEntry = true
+        return field
+    }()
+    
+    //Button
+    private let registerButton : UIButton = {
+        let button = UIButton()
+        button.setTitle("Register", for: .normal)
+        button.backgroundColor = .link
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 12
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.masksToBounds = true
+        button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        return button
+    }()
+    
+
+    
+    //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Add new Account"
+        title = "Login"
         view.backgroundColor = .white
-        print("Register National")
+        
+        emailField.delegate = self
+        passwordField.delegate = self
+        
+        //action Button Tap
+        actionButton()
+        //add subView
+        addSubView()
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        positionObjectView()
+    }
+    
+    
+    //actionButtonTap
+    private func actionButton() {
+        //register
+        registerButton.addTarget(self,
+                              action: #selector(didTapRegisterButton),
+                              for: .touchUpInside)
+        //addPhoto
+        let gesture = UITapGestureRecognizer(target: self,
+                                          action: #selector(didTapChangePhoto))
+        imageView.addGestureRecognizer(gesture)
+        imageView.isUserInteractionEnabled = true
+        scrollView.isUserInteractionEnabled = true
+        
+    }
+    
+    //set position view
+    private func positionObjectView() {
+        scrollView.frame = view.bounds
+        let size = scrollView.width / 3
+        let sizeWidth = scrollView.width
+        imageView.frame = CGRect(x: (sizeWidth - size) / 2,
+                                 y: size - 100,
+                                 width: size,
+                                 height: size)
+        emailField.frame = CGRect(x: 30,
+                                 y: imageView.bottom + 20,
+                                 width: scrollView.width - 60,
+                                 height: 50)
+        firstNameField.frame = CGRect(x: 30,
+                                 y: emailField.bottom + 10,
+                                 width: scrollView.width - 60,
+                                 height: 50)
+        lastNameField.frame = CGRect(x: 30,
+                                 y: firstNameField.bottom + 10,
+                                 width: scrollView.width - 60,
+                                 height: 50)
+        passwordField.frame = CGRect(x: 30,
+                                 y: lastNameField.bottom + 10,
+                                 width: scrollView.width - 60,
+                                 height: 50)
+        rePasswordField.frame = CGRect(x: 30,
+                                 y: passwordField.bottom + 10,
+                                 width: scrollView.width - 60,
+                                 height: 50)
+        registerButton.frame = CGRect(x: 30,
+                                 y: rePasswordField.bottom + 20,
+                                 width: scrollView.width - 60,
+                                 height: 50)
+    }
+    
+    private func addSubView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(imageView)
+        scrollView.addSubview(emailField)
+        scrollView.addSubview(passwordField)
+        scrollView.addSubview(registerButton)
+        scrollView.addSubview(lastNameField)
+        scrollView.addSubview(firstNameField)
+        scrollView.addSubview(rePasswordField)
+    }
+    
+    
+    //MARK: - Action
+    
+    //loginButton
+    @objc private func didTapRegisterButton() {
+        guard let email = emailField.text,
+              let password = passwordField.text,
+              let firstName = firstNameField.text,
+              let lastName = lastNameField.text,
+              let rePassword = rePasswordField.text,
+              !firstName.isEmpty,
+              !lastName.isEmpty,
+              !rePassword.isEmpty,
+              !email.isEmpty,
+              !password.isEmpty,
+              password.count >= 6,
+              rePassword == password else {
+            alertNotificationLogin()
+            return
+        }
+        //Firebase register
+    }
+    
+    //alert
+    private func alertNotificationLogin() {
+        let alert = UIAlertController(title: "Woops", message: "PPlease fill in all information and password must be 6 characters or more and the same as re-password", preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        alert.addAction(dismissAction)
+        present(alert, animated: true, completion: nil)
+    }
+    //Add photo
+    @objc private func didTapChangePhoto() {
+        print("Add To Photo")
     }
 
+}
+
+extension RegisterVC : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == emailField {
+            passwordField.becomeFirstResponder()
+        } else if textField == passwordField {
+            didTapRegisterButton()
+        }
+        return true
+    }
 }
