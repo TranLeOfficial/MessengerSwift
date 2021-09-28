@@ -153,6 +153,7 @@ class LoginVC: UIViewController {
             alertNotificationLogin()
             return
         }
+        //Firebase login
     }
     
     //aler
