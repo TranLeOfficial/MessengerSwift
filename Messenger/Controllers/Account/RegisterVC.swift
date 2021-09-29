@@ -11,16 +11,17 @@ import FirebaseAuth
 
 class RegisterVC: UIViewController {
     
+    
     //MARK: - object View
     //imageView
     private let imageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person")
+        imageView.image = UIImage(systemName: "person.circle.fill")
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 2
-        imageView.layer.borderColor = UIColor.blue.cgColor
+        imageView.layer.borderColor = UIColor.gray.cgColor
         return imageView
     }()
     //scrollView
@@ -128,7 +129,7 @@ class RegisterVC: UIViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Login"
+        title = "Register"
         view.backgroundColor = .white
         
         emailField.delegate = self
@@ -231,22 +232,38 @@ class RegisterVC: UIViewController {
         }
         //Firebase register
         //MARK: - Register User in Firebase
-        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-            guard let result = authResult, error == nil else {
-                print("Error creating User")
+        DatabaseManager.shared.userExists(with: email, completion:  { [weak self] exists in
+            guard let strongSelf = self else{
                 return
             }
-            let newUser = result.user
-            print("Successfull Create User ", newUser)
-        }
-        
-        
+            guard !exists else {
+                //user already exist
+                strongSelf.alertNotificationLogin(message: "Looks like a user account for that email address already exists. ")
+                return
+            }
+            
+            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password, completion:  { authResult, error in
+                
+                guard authResult != nil, error == nil else {
+                    print("Error creating User")
+                    return
+                }
+    //            let newUser = result.user
+    //            print("Successfull Create User ", newUser)
+                DatabaseManager.shared.insertUser(with: ChatAppUser(emailAddress: email,
+                                                                    firstName: firstName,
+                                                                    lastName: lastName,
+                                                                    password: password))
+                
+                strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+            })
+        })
     }
     
     //alert
-    private func alertNotificationLogin() {
-        let alert = UIAlertController(title: "Woops", message: "PPlease fill in all information and password must be 6 characters or more and the same as re-password", preferredStyle: .alert)
-        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+    private func alertNotificationLogin(message: String = Constant.woopRegister) {
+        let alert = UIAlertController(title: Constant.titleAlertWarning, message: message, preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: Constant.dismiss, style: .cancel, handler: nil)
         alert.addAction(dismissAction)
         present(alert, animated: true, completion: nil)
     }
@@ -274,12 +291,12 @@ extension RegisterVC : UITextFieldDelegate {
 extension RegisterVC : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func presentPhotoActionSheet() {
-        let alert = UIAlertController(title: "Profile Picture", message: "How would you like to select a picture?", preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let takePhotoAction = UIAlertAction(title: "Take photo", style: .default) { _ in
+        let alert = UIAlertController(title: Constant.titleAlertPhoto, message: Constant.messageAlertPhoto, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: Constant.alertCancel, style: .cancel, handler: nil)
+        let takePhotoAction = UIAlertAction(title: Constant.alertTakePhoto, style: .default) { _ in
             self.presentCamera()
         }
-        let choosePhotoAction = UIAlertAction(title: "Choose photo", style: .default) { _ in
+        let choosePhotoAction = UIAlertAction(title: Constant.alertChoosePhoto, style: .default) { _ in
             self.presentPhotoLibrary()
         }
         alert.addAction(cancelAction)

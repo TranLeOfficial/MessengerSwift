@@ -60,7 +60,7 @@ class LoginVC: UIViewController {
     //Button
     private let loginButton : UIButton = {
         let button = UIButton()
-        button.setTitle("Login", for: .normal)
+        button.setTitle(Constant.login, for: .normal)
         button.backgroundColor = .link
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
@@ -76,7 +76,7 @@ class LoginVC: UIViewController {
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Login"
+        title = Constant.login
         view.backgroundColor = .white
         
         emailField.delegate = self
@@ -96,7 +96,7 @@ class LoginVC: UIViewController {
     //actionButtonTap
     private func actionButton() {
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register",
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constant.register,
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(didTapRegister))
@@ -154,20 +154,25 @@ class LoginVC: UIViewController {
             return
         }
         //Firebase login
-        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { authResult, error in
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] authResult, error in
+            
+            guard let strongSelf = self else {
+                return
+            }
             guard let result = authResult, error == nil else {
                 print("Error login ...")
                 return
             }
             let userLogin = result.user
             print("Login successfull with email ", userLogin)
+            strongSelf.navigationController?.dismiss(animated: true, completion: nil)
         })
     }
     
     //aler
     private func alertNotificationLogin() {
-        let alert = UIAlertController(title: "Woops", message: "Please fill in all information and password must be 6 characters ", preferredStyle: .alert)
-        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+        let alert = UIAlertController(title: Constant.titleAlertWarning, message: Constant.woopLogin, preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: Constant.dismiss, style: .cancel, handler: nil)
         alert.addAction(dismissAction)
         present(alert, animated: true, completion: nil)
     }

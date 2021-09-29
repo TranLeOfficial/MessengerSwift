@@ -22,6 +22,8 @@
 		AA4DC22E2701BC86007604BC /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC22D2701BC86007604BC /* ProfileVC.swift */; };
 		AA4DC2302701F9AF007604BC /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC22F2701F9AF007604BC /* Extentions.swift */; };
 		AA4DC2322703110C007604BC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA4DC2312703110C007604BC /* GoogleService-Info.plist */; };
+		AA4DC23427049E8B007604BC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC23327049E8B007604BC /* Constants.swift */; };
+		AA4DC2362704AF03007604BC /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4DC2352704AF03007604BC /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		AA4DC22D2701BC86007604BC /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		AA4DC22F2701F9AF007604BC /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		AA4DC2312703110C007604BC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AA4DC23327049E8B007604BC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Messenger/Resources/Constants.swift; sourceTree = SOURCE_ROOT; };
+		AA4DC2352704AF03007604BC /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		D5DD92D13E5A6F0FD97C7A94 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,6 +100,7 @@
 				AA4DC205270051E8007604BC /* AppDelegate.swift */,
 				AA4DC207270051E8007604BC /* SceneDelegate.swift */,
 				AA4DC22F2701F9AF007604BC /* Extentions.swift */,
+				AA4DC2352704AF03007604BC /* DatabaseManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 		AA4DC21E27005277007604BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AA4DC23327049E8B007604BC /* Constants.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -295,12 +301,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA4DC22C2701BC72007604BC /* NewConversationVC.swift in Sources */,
+				AA4DC23427049E8B007604BC /* Constants.swift in Sources */,
 				AA4DC22A2701BC50007604BC /* VideoPlayerVC.swift in Sources */,
 				AA4DC2302701F9AF007604BC /* Extentions.swift in Sources */,
 				AA4DC20A270051E8007604BC /* ConversationVC.swift in Sources */,
 				AA4DC22E2701BC86007604BC /* ProfileVC.swift in Sources */,
 				AA4DC206270051E8007604BC /* AppDelegate.swift in Sources */,
 				AA4DC2232701BBD1007604BC /* LoginVC.swift in Sources */,
+				AA4DC2362704AF03007604BC /* DatabaseManager.swift in Sources */,
 				AA4DC2282701BC2D007604BC /* PhotoViewerVC.swift in Sources */,
 				AA4DC208270051E8007604BC /* SceneDelegate.swift in Sources */,
 				AA4DC2252701BBE0007604BC /* RegisterVC.swift in Sources */,
