@@ -7,18 +7,16 @@ target 'Messenger' do
 
 # Firebase
 
-
-
-  pod 'Firebase/Core'
-  pod 'Firebase/Auth'
-  pod 'Firebase/Database'
-
-
+pod 'Firebase/Core'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
 
 
 # Facebook
-
 pod 'FBSDKLoginKit'
+
+# Google
+pod 'GoogleSignIn'
 
   # Pods for Messenger
 

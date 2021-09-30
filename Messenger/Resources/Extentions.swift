@@ -29,6 +29,8 @@ extension UIView {
     public var right: CGFloat {
         return self.frame.size.width + self.frame.origin.x
     }
-    
-    
+}
+
+extension Notification.Name {
+    static let didLoginNotification = Notification.Name("didLoginNotification")
 }
