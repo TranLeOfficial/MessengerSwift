@@ -7,7 +7,11 @@
 		<key>Messenger.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< HEAD
 			<integer>0</integer>
+=======
+			<integer>18</integer>
+>>>>>>> NhanTT13
 		</dict>
 	</dict>
 </dict>
