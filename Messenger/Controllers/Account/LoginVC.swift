@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
+import GoogleSignIn
 
 class LoginVC: UIViewController {
     
@@ -23,9 +24,9 @@ class LoginVC: UIViewController {
     }()
     //scrollView
     private let scrollView : UIScrollView =  {
-       let scrollView = UIScrollView()
+        let scrollView = UIScrollView()
         scrollView.clipsToBounds = true
-       return scrollView
+        return scrollView
     }()
     //textField
     private let emailField : UITextField = {
@@ -84,17 +85,32 @@ class LoginVC: UIViewController {
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
     }()
-
+    
+    private let googleLoginButton : GIDSignInButton = {
+        let button = GIDSignInButton()
+        button.layer.cornerRadius = 12
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.masksToBounds = true
+        //button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
+        return button
+    }()
+    
+    private var loginObserver: NSObjectProtocol?
+    
     
     //MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Constant.login
         view.backgroundColor = .white
-      
+        
         emailField.delegate = self
         passwordField.delegate = self
         facebookLoginButton.delegate = self
+        
+        
+        notificationSigninGoogle()
         
         //action Button Tap
         actionButton()
@@ -106,10 +122,23 @@ class LoginVC: UIViewController {
         positionObjectView()
     }
     
+    //Notification Signin Google
+    private func notificationSigninGoogle() {
+        loginObserver = NotificationCenter.default.addObserver(forName: .didLoginNotification, object: nil, queue: .main, using: { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.navigationController?.dismiss(animated: true, completion: nil)
+        })
+        
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+    }
+    
     
     //actionButtonTap
     private func actionButton() {
-
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: Constant.register,
                                                             style: .done,
                                                             target: self,
@@ -129,34 +158,35 @@ class LoginVC: UIViewController {
                                  width: size,
                                  height: size)
         emailField.frame = CGRect(x: 30,
-                                 y: imageView.bottom + 20,
-                                 width: scrollView.width - 60,
-                                 height: 50)
+                                  y: imageView.bottom + 20,
+                                  width: scrollView.width - 60,
+                                  height: 50)
         passwordField.frame = CGRect(x: 30,
-                                 y: emailField.bottom + 10,
-                                 width: scrollView.width - 60,
-                                 height: 50)
+                                     y: emailField.bottom + 10,
+                                     width: scrollView.width - 60,
+                                     height: 50)
         loginButton.frame = CGRect(x: 30,
-                                 y: passwordField.bottom + 20,
-                                 width: scrollView.width - 60,
-                                 height: 50)
+                                   y: passwordField.bottom + 20,
+                                   width: scrollView.width - 60,
+                                   height: 50)
         facebookLoginButton.frame = CGRect(x: 30,
                                            y: loginButton.bottom + 10,
                                            width: scrollView.width - 60,
                                            height: 50)
-        
+        googleLoginButton.frame = CGRect(x: 30,
+                                         y: facebookLoginButton.bottom + 10,
+                                         width: scrollView.width - 60,
+                                         height: 50)
     }
     
     private func addSubView() {
-        
-        
-        
         view.addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(emailField)
         scrollView.addSubview(passwordField)
         scrollView.addSubview(loginButton)
         scrollView.addSubview(facebookLoginButton)
+        scrollView.addSubview(googleLoginButton)
     }
     
     
@@ -199,7 +229,7 @@ class LoginVC: UIViewController {
         alert.addAction(dismissAction)
         present(alert, animated: true, completion: nil)
     }
-
+    
 }
 
 extension LoginVC : UITextFieldDelegate {
@@ -250,7 +280,7 @@ extension LoginVC: LoginButtonDelegate {
             }
             let firstName = nameComponents[0]
             let lastName = nameComponents[1]
-
+            
             DatabaseManager.shared.userExists(with: email, completion: { exists in
                 if !exists {
                     DatabaseManager.shared.insertUser(with: ChatAppUser(emailAddress: email,
@@ -279,4 +309,4 @@ extension LoginVC: LoginButtonDelegate {
         })
     }
 }
-    
+
