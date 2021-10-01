@@ -12,6 +12,8 @@ class ConversationVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("NihanTT14")
        
     }
     
